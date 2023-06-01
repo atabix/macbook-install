@@ -4,6 +4,7 @@ namespace App;
 
 use App\Contracts\Request;
 
+#[\AllowDynamicProperties]
 class Router
 {
     protected $request;

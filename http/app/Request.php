@@ -5,6 +5,7 @@ namespace App;
 use App\Contracts\Request as RequestContract;
 use InvalidArgumentException;
 
+#[\AllowDynamicProperties]
 class Request implements RequestContract
 {
     public function __construct()
@@ -51,7 +52,7 @@ class Request implements RequestContract
     public function setMethod($method)
     {
         if (! \in_array($method, ['POST', 'GET'])) {
-            throw new InvalidArgumentException("The HTTP method \"${method}\" is not supported.");
+            throw new InvalidArgumentException("The HTTP method \"{$method}\" is not supported.");
         }
 
         $this->requestMethod = $method;
