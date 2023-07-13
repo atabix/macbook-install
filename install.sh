@@ -44,6 +44,7 @@ brew install spotify
 brew install authy
 brew install microsoft-office
 brew install bitwarden
+brew install pnpm
 
 git lfs install
 
@@ -167,8 +168,10 @@ source ~/.zshrc
 
 # Install required versions
 nvm install 14
+nvm install 18
 nvm install 17
 nvm use 17
+
 
 # Setup ZSH
 sudo sh -c "echo $(which zsh) >> /etc/shells"
@@ -202,6 +205,10 @@ source ~/.zshrc
 echo "Open Android Studio and run the initial setup."
 
 npm install -g nativescript
+npm install -g npm@8.11.0
+npm install -g rimraf
+npm install -g yarn
+
 ns doctor android
 
 # Setup Architect
