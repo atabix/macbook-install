@@ -183,7 +183,8 @@ if [ "$DEVELOPER" = false ]; then
         #install tools with brew
         echo "Install step: 1.1"
         cd || exit
-        curl -O https://raw.githubusercontent.com/atabix/macbook-install/main/Brewfile
+        curl -O https://raw.githubusercontent.com/atabix/macbook-install/main/Brewfile-nondev
+        mv Brewfile-nondev Brewfile
         brew bundle install
         source $HOME/.zshrc
 
@@ -203,7 +204,8 @@ if [ "$DEVELOPER" = false ]; then
         #install tools with brew
         echo "Install step: 1.1"
         cd || exit
-        curl -O https://raw.githubusercontent.com/atabix/macbook-install/main/Brewfile
+        curl -O https://raw.githubusercontent.com/atabix/macbook-install/main/Brewfile-nondev
+        mv Brewfile-nondev Brewfile
         brew bundle install
         source $HOME/.zshrc
 
