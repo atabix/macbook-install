@@ -56,6 +56,7 @@ zsh_env_install() {
 }
 vscode_extensions() {
     #populate vscode config with default settings before extensions so we don't overwrite anything
+    mkdir -p $HOME/Library/Application\ Support/Code/User
     curl -o $HOME/Library/Application\ Support/Code/User/settings.json https://raw.githubusercontent.com/atabix/macbook-install/main/configs/vscode-settings.json
     #install vscode extensions
     code --install-extension alefragnani.project-manager
@@ -64,20 +65,14 @@ vscode_extensions() {
     code --install-extension bmewburn.vscode-intelephense-client
     code --install-extension bradlc.vscode-tailwindcss
     code --install-extension calebporzio.better-phpunit
-    code --install-extension coenraads.disableligatures
     code --install-extension fireyy.vscode-language-todo
     code --install-extension ikappas.composer
     code --install-extension jaguadoromero.vscode-php-create-class
-    code --install-extension jeff-hykin.better-syntax
     code --install-extension junstyle.php-cs-fixer
-    code --install-extension ldd-vs-code.better-package-json
     code --install-extension mehedidracula.php-namespace-resolver
-    code --install-extension mikestead.dotenv
     code --install-extension mohamedbenhida.laravel-intellisense
-    code --install-extension mrmlnc.vscode-apache
     code --install-extension mrmlnc.vscode-duplicate
     code --install-extension steoates.autoimport
-    code --install-extension vscode-icons-team.vscode-icons
     code --install-extension vue.volar
     code --install-extension waderyan.gitblame
     code --install-extension xdebug.php-debug
@@ -130,11 +125,6 @@ if [ "$DEVELOPER" = true ]; then
         NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
         eval "$(/opt/homebrew/bin/brew shellenv)"
 
-        #tell macos to not index these folders
-        [ ! -d "$HOME/Development" ] && mkdir -p $HOME/Development
-        touch $HOME/Development/.metadata_never_index
-        touch /opt/homebrew/.metadata_never_index
-
         echo "Install step: 1.2"
         dev_extras
 
@@ -169,10 +159,6 @@ if [ "$DEVELOPER" = true ]; then
         echo "Install step: 1.1"
         NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
         eval "$(/usr/local/bin/brew shellenv)"
-
-        #tell macos to not index these folders
-        [ ! -d "$HOME/Development" ] && mkdir -p $HOME/Development
-        touch $HOME/Development/.metadata_never_index
 
         echo "Install step: 1.2"
         dev_extras
@@ -209,9 +195,6 @@ if [ "$DEVELOPER" = false ]; then
 
         #add brew binary to zsh path
         echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> $HOME/.zshrc
-
-        #tell macos to not index these folders
-        touch /opt/homebrew/.metadata_never_index
 
         #install tools with brew
         echo "Install step: 1.1"
