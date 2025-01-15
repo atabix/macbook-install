@@ -102,7 +102,7 @@ brew_autoupdate() {
     brew tap homebrew/autoupdate
     mkdir -p $HOME/Library/LaunchAgents
     source $HOME/.zshrc
-    brew autoupdate start 86400 --upgrade --greedy --cleanup --enable-notification
+    brew autoupdate start --upgrade --greedy --cleanup
 }
 
 #detect if developer variable has been set
