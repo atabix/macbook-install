@@ -40,6 +40,11 @@ zsh_env_install() {
     echo ")" >> $HOME/.zshrc
     echo "# omz" >> $HOME/.zshrc
     echo 'export ZSH="$HOME/.oh-my-zsh"' >> $HOME/.zshrc
+    echo "# alias" >> $HOME/.zshrc
+    echo 'alias ls="ls -hplav --color=always"' >> $HOME/.zshrc
+    echo "# env" >> $HOME/.zshrc
+    echo 'export PATH="$PATH:$HOME/.fzf/bin:$HOME/Library/Application Support/Herd/bin:$HOME/.composer/vendor/bin"' >> $HOME/.zshrc
+    echo 'source $ZSH/oh-my-zsh.sh' >> $HOME/.zshrc
     if [[ $(uname -m) == 'arm64' ]]; then
         echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> $HOME/.zshrc
     fi
@@ -47,12 +52,6 @@ zsh_env_install() {
         echo 'eval "$(/usr/local/bin/brew shellenv)"' >> $HOME/.zshrc
     fi
     echo 'FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"' >> $HOME/.zshrc
-    echo 'source $ZSH/oh-my-zsh.sh' >> $HOME/.zshrc
-    echo "# alias" >> $HOME/.zshrc
-    echo 'alias ls="ls -hplav --color=always"' >> $HOME/.zshrc
-    echo "# env" >> $HOME/.zshrc
-    echo 'export PATH="$PATH:$HOME/.fzf/bin"' >> $HOME/.zshrc
-    echo "# inits" >> $HOME/.zshrc
 }
 vscode_extensions() {
     #populate vscode config with default settings before extensions so we don't overwrite anything
@@ -87,22 +86,6 @@ dev_extras() {
 
     #install lfs for git
     git lfs install
-
-    #volta
-    curl https://get.volta.sh | bash
-    $HOME/.volta/bin/volta install node
-    #remove unnecessary and not loaded environment file created by volta, safety check with a hash so that we don't delete something we don't want to delete
-    if echo "174fd45578e64fd81c3701d6fc9608f9e2a4ce8e  .profile" | shasum -a 1 -c | grep -q '.profile: OK'; then
-        rm .profile
-    fi
-
-}
-brew_autoupdate() {
-    #make brew autoupdate
-    brew tap homebrew/autoupdate
-    mkdir -p $HOME/Library/LaunchAgents
-    source $HOME/.zshrc
-    brew autoupdate start --upgrade --greedy --cleanup
 }
 
 #detect if developer variable has been set
@@ -140,9 +123,6 @@ if [ "$DEVELOPER" = true ]; then
 
         #make starship work
         echo 'eval "$(starship init zsh)"' >> $HOME/.zshrc
-
-        echo "Install step: 1.5"
-        brew_autoupdate
     fi
     if [[ $(uname -m) == 'x86_64' ]]; then
         echo x86_64 detected
@@ -175,9 +155,6 @@ if [ "$DEVELOPER" = true ]; then
 
         #make starship work
         echo 'eval "$(starship init zsh)"' >> $HOME/.zshrc
-
-        echo "Install step: 1.5"
-        brew_autoupdate
     fi
 fi
 if [ "$DEVELOPER" = false ]; then
@@ -203,9 +180,6 @@ if [ "$DEVELOPER" = false ]; then
         brew bundle install
         source $HOME/.zshrc
         rm Brewfile
-
-        echo "Install step: 1.2"
-        brew_autoupdate
     fi
     if [[ $(uname -m) == 'x86_64' ]]; then
         echo x86_64 detected
@@ -230,8 +204,5 @@ if [ "$DEVELOPER" = false ]; then
         brew bundle install
         source $HOME/.zshrc
         rm Brewfile
-
-        echo "Install step: 1.2"
-        brew_autoupdate
     fi
 fi
