@@ -43,7 +43,7 @@ zsh_env_install() {
     echo "# alias" >> $HOME/.zshrc
     echo 'alias ls="ls -hplav --color=always"' >> $HOME/.zshrc
     echo "# env" >> $HOME/.zshrc
-    echo 'export PATH="$PATH:$HOME/.fzf/bin:$HOME/Library/Application Support/Herd/bin:$HOME/.composer/vendor/bin"' >> $HOME/.zshrc
+    echo 'export PATH="$PATH:$HOME/.fzf/bin:$HOME/.bin:$HOME/Library/Application Support/Herd/bin:$HOME/.composer/vendor/bin"' >> $HOME/.zshrc
     echo 'source $ZSH/oh-my-zsh.sh' >> $HOME/.zshrc
     if [[ $(uname -m) == 'arm64' ]]; then
         echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> $HOME/.zshrc
@@ -113,9 +113,9 @@ if [ "$DEVELOPER" = true ]; then
 
         #php cs fix
         echo "Install step: 1.3"
-        mkdir -p /opt/homebrew/lib/php-cs-fixer
-        composer require --dev --working-dir=/opt/homebrew/lib/php-cs-fixer friendsofphp/php-cs-fixer
-        ln -s /opt/homebrew/lib/php-cs-fixer/vendor/bin/php-cs-fixer /opt/homebrew/bin/php-cs-fixer
+        mkdir -p $HOME/.bin
+        curl -L https://cs.symfony.com/download/php-cs-fixer-v3.phar -o $HOME/.bin/php-cs-fixer
+        chmod +x $HOME/.bin/php-cs-fixer
         curl -o $HOME/Development/.php-cs-fixer.dist.php https://raw.githubusercontent.com/atabix/macbook-install/main/scripts/php-cs-fixer.dist.php
 
         echo "Install step: 1.4"
@@ -145,9 +145,9 @@ if [ "$DEVELOPER" = true ]; then
 
         #php cs fix
         echo "Install step: 1.3"
-        mkdir -p $HOME/.php-cs-fixer
-        composer require --dev --working-dir=$HOME/.php-cs-fixer friendsofphp/php-cs-fixer
-        echo 'export PATH="$PATH:$HOME/.php-cs-fixer/vendor/bin"' >> $HOME/.zshrc
+        mkdir -p $HOME/.bin
+        curl -L https://cs.symfony.com/download/php-cs-fixer-v3.phar -o $HOME/.bin/php-cs-fixer
+        chmod +x $HOME/.bin/php-cs-fixer
         curl -o $HOME/Development/.php-cs-fixer.dist.php https://raw.githubusercontent.com/atabix/macbook-install/main/scripts/php-cs-fixer.dist.php
 
         echo "Install step: 1.4"
