@@ -43,7 +43,7 @@ zsh_env_install() {
     echo "# alias" >> $HOME/.zshrc
     echo 'alias ls="ls -hplav --color=always"' >> $HOME/.zshrc
     echo "# env" >> $HOME/.zshrc
-    echo 'export PATH="$PATH:$HOME/.fzf/bin:$HOME/.bin:$HOME/Library/Application Support/Herd/bin"' >> $HOME/.zshrc
+    echo 'export PATH="$PATH:$HOME/.fzf/bin:$HOME/.bin:$HOME/.volta/bin:$HOME/Library/Application Support/Herd/bin"' >> $HOME/.zshrc
     echo 'source $ZSH/oh-my-zsh.sh' >> $HOME/.zshrc
     if [[ $(uname -m) == 'arm64' ]]; then
         echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> $HOME/.zshrc
