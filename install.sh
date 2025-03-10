@@ -28,7 +28,9 @@ zsh_env_install() {
     #fzf for zsh auto completion
     git clone --depth 1 https://github.com/junegunn/fzf.git $HOME/.fzf && cd $HOME/.fzf && ./install --bin --no-update-rc --no-bash --no-zsh --no-fish && cd || exit
     #changing .zshrc
-    echo "# plugins" > $HOME/.zshrc
+    echo "# alias" > $HOME/.zshrc
+    echo 'alias ls="ls -hplav --color=always"' >> $HOME/.zshrc
+    echo "# plugins" >> $HOME/.zshrc
     echo "plugins=(" >> $HOME/.zshrc
     echo "brew" >> $HOME/.zshrc
     echo "docker" >> $HOME/.zshrc
@@ -38,13 +40,9 @@ zsh_env_install() {
     echo "zsh-history-substring-search" >> $HOME/.zshrc
     echo "zsh-syntax-highlighting" >> $HOME/.zshrc
     echo ")" >> $HOME/.zshrc
-    echo "# omz" >> $HOME/.zshrc
-    echo 'export ZSH="$HOME/.oh-my-zsh"' >> $HOME/.zshrc
-    echo "# alias" >> $HOME/.zshrc
-    echo 'alias ls="ls -hplav --color=always"' >> $HOME/.zshrc
     echo "# env" >> $HOME/.zshrc
+    echo 'export ZSH="$HOME/.oh-my-zsh"' >> $HOME/.zshrc
     echo 'export PATH="$PATH:$HOME/.fzf/bin:$HOME/.bin:$HOME/.volta/bin:$HOME/Library/Application Support/Herd/bin"' >> $HOME/.zshrc
-    echo 'source $ZSH/oh-my-zsh.sh' >> $HOME/.zshrc
     if [[ $(uname -m) == 'arm64' ]]; then
         echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> $HOME/.zshrc
     fi
@@ -52,6 +50,7 @@ zsh_env_install() {
         echo 'eval "$(/usr/local/bin/brew shellenv)"' >> $HOME/.zshrc
     fi
     echo 'FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"' >> $HOME/.zshrc
+    echo 'source $ZSH/oh-my-zsh.sh' >> $HOME/.zshrc
 }
 vscode_extensions() {
     #populate vscode config with default settings before extensions so we don't overwrite anything
