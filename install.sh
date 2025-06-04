@@ -157,6 +157,8 @@ if [ "$DEVELOPER" = true ]; then
         #make starship work
         echo 'eval "$(starship init zsh)"' >> $HOME/.zshrc
     fi
+    curl -o $HOME/dev-notice.md https://raw.githubusercontent.com/atabix/macbook-install/main/dev-notice.md
+    /opt/homebrew/bin/code $HOME/dev-notice.md
 fi
 if [ "$DEVELOPER" = false ]; then
     echo Non-developer laptop
