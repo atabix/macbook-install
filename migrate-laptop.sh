@@ -25,4 +25,4 @@ for item in "${source_array[@]}"; do
     fi
 done
 
-tar cf migrate.tar "${copy_array[@]}"
+tar cvf migrate.tar "${copy_array[@]}"
