@@ -6,6 +6,8 @@ source_array=(
     "$HOME/.aws"
     "$HOME/.oci"
     "$HOME/.ssh"
+    "$HOME/.composer"
+    "$HOME/.npmrc"
     "$HOME/Library/Application Support/Code/User"
     "$HOME/Library/Application Support/com.fournova.Tower3"
     "$HOME/Library/Application Support/com.raycast.macos"
