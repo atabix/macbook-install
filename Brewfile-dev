@@ -1,4 +1,5 @@
 brew "awscli"
+brew "fzf"
 brew "git-lfs"
 brew "git-svn"
 brew "git"
